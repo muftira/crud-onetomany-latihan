@@ -14,7 +14,8 @@ const addProduct = async (req, res) => {
     try {
         const name = req.body.name
         const result = await Product.create({name})
-        const cart = await Cart.create({name})
+        console.log('result =>',result);
+        const cart = await Cart.create({name: name, product_id: result.id})
         Product.addCart(cart)
         res.status(200).json(result)
     } catch (error) {

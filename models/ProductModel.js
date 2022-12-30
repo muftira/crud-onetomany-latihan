@@ -18,13 +18,11 @@ const Product = db.define('product', {
 })
 
 Product.hasMany(Cart,{
-    foreignKey: "product_id",
-    as: 'cart'
+    foreignKey: "product_id"
 })
 
 Cart.belongsTo(Product, {
-    foreignKey: "product_id",
-    as: 'product'
+    foreignKey: "product_id"
 })
 
 // Product.associate = models => {

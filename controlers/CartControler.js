@@ -1,8 +1,13 @@
 const Cart = require('../models/CartModel');
+const Product = require('../models/ProductModel');
 
 const getCart = async (req, res) => {
     try {
-        const result = await Cart.findAll()
+        const result = await Cart.findAll({
+            include: {
+                model: Product
+            }
+        })
         res.status(200).json(result)
     } catch (error) {
         res.json(error)
