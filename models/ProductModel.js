@@ -2,6 +2,7 @@ const {Sequelize} = require('sequelize');
 const db = require('../config/Database');
 const {DataTypes} = Sequelize;
 const Cart = require('../models/CartModel')
+const CartProduct = require('../models/CartProductModel')
 
 const Product = db.define('product', {
     id: {
@@ -17,13 +18,12 @@ const Product = db.define('product', {
     timestamps: false
 })
 
-Product.hasMany(Cart,{
-    foreignKey: "product_id"
-})
-
-Cart.belongsTo(Product, {
-    foreignKey: "product_id"
-})
+Product.belongsToMany(Cart,{ through: CartProduct })
+Cart.belongsToMany(Product,{ through: CartProduct })
+Product.hasMany(CartProduct);
+CartProduct.belongsTo(Product);
+Cart.hasMany(CartProduct);
+CartProduct.belongsTo(Cart);
 
 // Product.associate = models => {
 //     Product.hasMany(models.Cart,{

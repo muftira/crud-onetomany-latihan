@@ -1,6 +1,7 @@
 const express = require("express");
 const ProductRoute = require('./routes/ProductRoute')
 const CartRoute = require('./routes/CartRoute')
+const CartProductRoute = require('./routes/CartProductRoute')
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 app.use(ProductRoute)
 app.use(CartRoute)
+app.use(CartProductRoute)
 
 
 //connect to server
